@@ -1,24 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import {Header, Main, Footer} from './layouts'
+import EmojiList from './components/EmojiList'
+import {useState} from 'react'
+import emojies from './data/emojies.json'
 
 function App() {
+
+  const [searchValue, setSearchValue] = useState('')
+  const [filteredEmojies, setFilteredEmojies] = useState(emojies)
+
+  const handleSearch = (value) => {
+    setSearchValue(value)
+    setFilteredEmojies(emojies.filter(el => el.keywords.includes(value)))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Main>
+        <h1 className='title'>😼 Emoji Search 😽</h1>
+        <input 
+          className='searchInput' 
+          type='text' 
+          placeholder='Search Emoji...'
+          value={searchValue}
+          onChange={(e) => handleSearch(e.target.value)} 
+        />
+        <EmojiList emojies={filteredEmojies} />
+      </Main>
+      <Footer />
+    </>
   );
 }
 

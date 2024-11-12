@@ -1,0 +1,7 @@
+.emojiContainer {
+    width: 100%;
+}
+
+.emojiContainer .emoji:last-child {
+    border-bottom: 1px solid gray;
+}
